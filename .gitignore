@@ -1,0 +1,22 @@
+# Ambiente virtual Python
+.venv/
+venv/
+env/
+
+# Cache do pytest e Python
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos de configuração local do VS Code
+.vscode/settings.json
+.vscode/launch.json
+
+# Arquivos temporários do Windows
+Thumbs.db
+.DS_Store
+
+# Logs e dados sensíveis (se houver no futuro)
+*.log
+.env
