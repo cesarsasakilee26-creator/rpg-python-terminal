@@ -1,5 +1,5 @@
 import pytest
-from src.models.personagem import Guerreiro, Mago, Arqueiro
+from src.models.personagem import Guerreiro
 from src.models.item import Arma, Armadura
 
 def test_atacar_guerreiro():
@@ -43,6 +43,16 @@ def test_receber_dano_nao_cura():
 
 
     assert guerreiro.vida == vida_inicial, f"Esperado: {vida_inicial}, Obtido: {guerreiro.vida}"  # Verifica se a vida do guerreiro não aumentou após receber dano menor que a defesa da armadura
-
  
+def test_receber_dano_com_armadura():
+    guerreiro = Guerreiro("Conan")
+    armadura = Armadura("Armadura de Ferro", "Armadura", "Uma armadura pesada feita de ferro, oferece excelente proteção.", 100, 10.0, 20)
+
+    armadura.usar(guerreiro)
+    vida_inicial = guerreiro.vida
+
+    guerreiro.receber_dano(30) # Dano maior que a defesa da armadura
+
+    assert guerreiro.vida == vida_inicial - (30 - armadura.defesa), f"Esperado: {vida_inicial - (30 - armadura.defesa)}, Obtido: {guerreiro.vida}"  # Verifica se a vida do guerreiro diminuiu corretamente após receber dano maior que a defesa da armadura
+
 

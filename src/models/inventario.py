@@ -29,5 +29,13 @@ class Inventario:
     def listar_itens(self):
         for item in self._itens:
             print(f"- {item}")
+
+
+    def tem_item(self, item) -> bool:
+        return item in self._itens
+
+    @property
+    def quantidade_itens(self):
+        return len(self._itens)
             
 
