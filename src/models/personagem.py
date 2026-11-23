@@ -6,6 +6,8 @@ from time import sleep
 class Personagem(ABC):
     def __init__(self, nome_personagem:str, vida:int, mana:int, dano_base):
         self.nome_personagem = nome_personagem
+        self.vida_maxima = vida
+        self.mana_maxima = mana
         self.vida = vida
         self.mana = mana
         self.inventario = Inventario()
@@ -17,6 +19,13 @@ class Personagem(ABC):
     def atacar(self) -> int: 
         pass
         
+    def esta_vivo(self) -> bool:
+         return self.vida > 0
+
+
+    def tem_mana(self) -> bool:
+         return self.mana > 0
+    
     @abstractmethod
     def usar_habilidade(self) -> int:
         pass
@@ -30,6 +39,10 @@ class Personagem(ABC):
         if valor < 0:
                 print("ERRO! VIDA NÃO PODE SER MENOR QUE 0, AJUSTANDO PARA 0!")
                 self._vida = 0
+        
+        elif valor > self.vida_maxima:
+                print("ERRO! VIDA NÃO PODE SER MAIOR QUE A VIDA MÁXIMA, AJUSTANDO PARA A VIDA MÁXIMA!")
+                self._vida = self.vida_maxima
         else:
                 self._vida = valor
 
@@ -87,38 +100,3 @@ class Arqueiro(Personagem):
 
     def usar_habilidade(self) -> int:
         return 25
-
-
-
-
-print("--- TESTE DE COMBATE E ARMADURA ---")
-sleep(1)
-
-# 1. Cenário: Sem armadura
-lucas = Guerreiro("Lucas")
-print(f"1. Vida inicial do Lucas: {lucas.vida}")
-sleep(1)
-
-print("\n[Ataque] Lucas recebeu 30 de dano SEM armadura!")
-lucas.receber_dano(30)
-print(f"-> Vida atual: {lucas.vida} (Deveria ser 90)")
-sleep(1)
-
-# 2. Cenário: Com armadura, dano alto
-print("\n[Equipamento] Lucas equipou o Escudo de Ferro (Defesa: 15)!")
-escudo = Armadura("Escudo de Ferro", "Armadura", "Proteção pesada", 100, 5.0, 15)
-escudo.usar(lucas)
-sleep(1)
-
-print("\n[Ataque] Lucas recebeu 30 de dano COM armadura!")
-lucas.receber_dano(30)
-print(f"-> Vida atual: {lucas.vida} (Deveria ser 75, pois 30 - 15 = 15 de dano real)")
-sleep(1)
-
-# 3. Cenário: A ARMADILHA (Dano menor que a defesa)
-print("\n[Ataque Fraco] Lucas recebeu apenas 10 de dano (menor que a defesa de 15)!")
-lucas.receber_dano(10)
-print(f"-> Vida atual: {lucas.vida} (Deveria CONTINUAR 75. Se subiu para 80, o bug da cura aconteceu!)")
-sleep(1)
-
-print("\n--- FIM DO TESTE ---")

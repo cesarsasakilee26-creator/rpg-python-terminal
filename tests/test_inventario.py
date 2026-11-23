@@ -5,7 +5,7 @@ from src.models.item import Arma
 def test_adicionar_item_inventario():
     inventario = Inventario()
 
-    espada = Arma("Espada Longa", 10, 5)
+    espada = Arma("Espada Longa", "Espada", "Descrição...", 100, 5.0, 10)
 
     inventario.adicionar_item(espada)
 
@@ -16,7 +16,7 @@ def test_adicionar_item_inventario():
 def test_remover_item_inventario():
     inventario = Inventario()
 
-    espada = Arma("Espada Longa", 10, 5)
+    espada = Arma("Espada Longa", "Espada", "Descrição...", 100, 5.0, 10)
     inventario.adicionar_item(espada)
     inventario.remover_item(espada)
 

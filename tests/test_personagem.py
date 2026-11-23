@@ -56,3 +56,9 @@ def test_receber_dano_com_armadura():
     assert guerreiro.vida == vida_inicial - (30 - armadura.defesa), f"Esperado: {vida_inicial - (30 - armadura.defesa)}, Obtido: {guerreiro.vida}"  # Verifica se a vida do guerreiro diminuiu corretamente após receber dano maior que a defesa da armadura
 
 
+def test_morte_personagem():
+    guerreiro = Guerreiro("Conan")
+    guerreiro.vida = 10 # Define a vida do guerreiro para um valor baixo
+    guerreiro.receber_dano(15) # Aplica dano maior que a vida atual do guerreiro
+
+    assert not guerreiro.esta_vivo(), f"Esperado: False, Obtido: {guerreiro.esta_vivo()}"  # Verifica se o guerreiro está morto após receber dano que excede sua vida
