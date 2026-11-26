@@ -2,9 +2,10 @@ from abc import ABC, abstractmethod
 from src.models.inventario import Inventario
 from src.models.item import Arma,Armadura
 from src.models.monstro import Monstro
+from src.models.habilidades import GritoDeGuerra
 from time import sleep
 class Personagem(ABC):
-    def __init__(self, nome_personagem:str, vida:int, mana:int, dano_base):
+    def __init__(self, nome_personagem:str, vida:int, mana:int, dano_base:float):
         self.nome_personagem = nome_personagem
         self.vida_maxima = vida
         self.mana_maxima = mana
@@ -100,3 +101,28 @@ class Arqueiro(Personagem):
 
     def usar_habilidade(self) -> int:
         return 25
+
+
+
+guerreiro = Guerreiro('Conan') # Objeto Guerreiro Instanciado
+inimigo = Monstro('zumbi', 200, 10, 0) # Objeto Monstro Instanciado
+espada = Arma("Espada Longa", "Espada", "Uma espada bem longa", 100.0, 50.0, 20) # Objeto Espada  Instanciado
+habilidade = GritoDeGuerra(20) # Objeto Grito de Guerra Instanciado
+
+dano = guerreiro.atacar()
+inimigo.receber_dano(dano)
+print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # sofreu dano do guerreiro somente com dano base
+
+espada.usar(guerreiro) #equipa a espada
+dano = guerreiro.atacar()
+inimigo.receber_dano(dano)
+print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # Sofreu o dano base + dano espada
+
+resultado = habilidade.usar(guerreiro) #Guerreiro utiliza habilidade de buff
+dano = guerreiro.atacar()
+inimigo.receber_dano(dano)
+print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}')#Sofreu dano base + dano da espada + habilidade
+
+
+
+
