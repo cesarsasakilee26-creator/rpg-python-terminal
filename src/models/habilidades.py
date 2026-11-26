@@ -6,7 +6,7 @@ class Habilidade(ABC):
         self.custo_mana = custo_mana
 
     @abstractmethod
-    def usar(self,  usuario: 'Personagem', alvo = 'None') -> dict:
+    def usar(self,  usuario: object, alvo = None) -> dict:
         # Retorna um dicionario com resultado:{'dano': int, 'efeito': str, 'mensagem': str} 
         ...
 
@@ -25,7 +25,7 @@ class GritoDeGuerra(Habilidade):
             return {f'aumento de dano': 0, 'efeito': 'Nenhum', 'mensagem': f"{usuario.nome_personagem} não tem mana suficiente para usar {self.nome}."}
 
         usuario.mana -= self.custo_mana
-        usuario.dano_base += self.valor_buff # Aumenta o ataque do por 3 turnos
+        usuario.buff_ataque += self.valor_buff # Aumenta o ataque do por 3 turnos
         return {'aumento de Dano': self.valor_buff, 'efeito': 'Aumento de Ataque', 'mensagem': f"{usuario.nome_personagem} usou {self.nome}!"}
 
     

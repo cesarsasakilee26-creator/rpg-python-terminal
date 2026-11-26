@@ -15,6 +15,7 @@ class Personagem(ABC):
         self.arma_equipada = None
         self.armadura_equipada = None
         self.dano_base = dano_base
+        self.buff_ataque = 0
         
     @abstractmethod 
     def atacar(self) -> int: 
@@ -65,7 +66,7 @@ class Guerreiro(Personagem):
         else:
              dano = self.dano_base
 
-        return dano
+        return dano + self.buff_ataque
 
     def usar_habilidade(self) -> int:
         return 25
@@ -104,24 +105,24 @@ class Arqueiro(Personagem):
 
 
 
-guerreiro = Guerreiro('Conan') # Objeto Guerreiro Instanciado
-inimigo = Monstro('zumbi', 200, 10, 0) # Objeto Monstro Instanciado
-espada = Arma("Espada Longa", "Espada", "Uma espada bem longa", 100.0, 50.0, 20) # Objeto Espada  Instanciado
-habilidade = GritoDeGuerra(20) # Objeto Grito de Guerra Instanciado
+# guerreiro = Guerreiro('Conan') # Objeto Guerreiro Instanciado
+# inimigo = Monstro('zumbi', 200, 10, 0) # Objeto Monstro Instanciado
+# espada = Arma("Espada Longa", "Espada", "Uma espada bem longa", 100.0, 50.0, 20) # Objeto Espada  Instanciado
+# habilidade = GritoDeGuerra(20) # Objeto Grito de Guerra Instanciado
 
-dano = guerreiro.atacar()
-inimigo.receber_dano(dano)
-print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # sofreu dano do guerreiro somente com dano base
+# dano = guerreiro.atacar()
+# inimigo.receber_dano(dano)
+# print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # sofreu dano do guerreiro somente com dano base
 
-espada.usar(guerreiro) #equipa a espada
-dano = guerreiro.atacar()
-inimigo.receber_dano(dano)
-print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # Sofreu o dano base + dano espada
+# espada.usar(guerreiro) #equipa a espada
+# dano = guerreiro.atacar()
+# inimigo.receber_dano(dano)
+# print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}') # Sofreu o dano base + dano espada
 
-resultado = habilidade.usar(guerreiro) #Guerreiro utiliza habilidade de buff
-dano = guerreiro.atacar()
-inimigo.receber_dano(dano)
-print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}')#Sofreu dano base + dano da espada + habilidade
+# resultado = habilidade.usar(guerreiro) #Guerreiro utiliza habilidade de buff
+# dano = guerreiro.atacar()
+# inimigo.receber_dano(dano)
+# print(f'Zumbi recebeu {dano} de dano, Vida Atual {inimigo.vida}')#Sofreu dano base + dano da espada + habilidade
 
 
 
